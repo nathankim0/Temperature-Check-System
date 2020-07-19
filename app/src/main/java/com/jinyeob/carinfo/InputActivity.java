@@ -12,6 +12,8 @@ import android.widget.Toast;
 public class InputActivity extends AppCompatActivity {
     private EditText numTextView;
     private EditText nameTextView;
+    private EditText teamTextView;
+
     Button button;
 
     @Override
@@ -22,19 +24,27 @@ public class InputActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
         numTextView = (EditText) findViewById(R.id.editTextNum);
         nameTextView = (EditText) findViewById(R.id.editTextName);
+        teamTextView = (EditText) findViewById(R.id.editTextTeam);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String num = numTextView.getText().toString();
                 String name = nameTextView.getText().toString();
+                String team = teamTextView.getText().toString();
 
-                SaveSharedPreference.setUser(InputActivity.this, numTextView.getText().toString(), nameTextView.getText().toString());
+                SaveSharedPreference.setUser(
+                        InputActivity.this,
+                        numTextView.getText().toString(),
+                        teamTextView.getText().toString(),
+                        nameTextView.getText().toString()
+                );
 
 
-                if (num.length() > 0 && name.length() > 0) {
+                if (num.length() > 0 && team.length() > 0 && name.length() > 0) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("num", num);
+                    intent.putExtra("team", team);
                     intent.putExtra("name", name);
 
                     startActivity(intent);
@@ -42,7 +52,7 @@ public class InputActivity extends AppCompatActivity {
 
                     finish();
                 } else {
-                    Toast.makeText(InputActivity.this, "사번과 이름을 입력해주세요", Toast.LENGTH_LONG).show();
+                    Toast.makeText(InputActivity.this, "정보를 입력해주세요", Toast.LENGTH_LONG).show();
                 }
             }
         });

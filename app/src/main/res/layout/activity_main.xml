@@ -12,30 +12,29 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:text="현재 저장된 사번과 이름입니다."
+            android:text="저장된 개인정보 입니다."
             android:textColor="#000000"
-            android:textSize="25dp" />
+            android:textSize="22dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
-            android:text="사번: "
+            android:text="전화번호: "
             android:textColor="#000000"
-            android:textSize="25dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/textview_num"
@@ -44,14 +43,38 @@
             android:layout_marginRight="15dp"
             android:text=""
             android:textColor="#000000"
-            android:textSize="25dp" />
+            android:textSize="20dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="부서: "
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textview_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,7 +82,7 @@
             android:layout_marginRight="15dp"
             android:text="이름: "
             android:textColor="#000000"
-            android:textSize="25dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/textview_name"
@@ -68,9 +91,31 @@
             android:layout_marginRight="15dp"
             android:text=""
             android:textColor="#000000"
-            android:textSize="25dp" />
+            android:textSize="20dp" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="날짜: "
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textview_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="20dp" />
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="6px"
@@ -81,12 +126,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal"
-        android:paddingTop="20dp">
+        android:paddingTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="주행거리를 입력 후 버튼을 클릭해주세요."
+            android:text="온도를 입력 후, 버튼을 클릭해주세요."
             android:textColor="#000000"
             android:textSize="20dp" />
     </LinearLayout>
@@ -95,35 +140,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:layout_gravity="center"
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
-            android:text="주행거리: "
+            android:text="온도: "
             android:textColor="#000000"
             android:textSize="25dp" />
 
         <EditText
-            android:id="@+id/editTextNum"
+            android:id="@+id/editTextTemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="5"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textSize="25dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:text="KM"
+            android:text="'C"
             android:textColor="#000000"
             android:textSize="25dp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"
+        android:padding="10dp"
         android:layout_gravity="center"
         android:orientation="horizontal">
         <Button
@@ -131,6 +176,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="완료"
-            android:textSize="25dp" />
+            android:textSize="20dp" />
     </LinearLayout>
 </LinearLayout>
