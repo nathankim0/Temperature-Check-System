@@ -13,7 +13,7 @@ public class InputActivity extends AppCompatActivity {
     private EditText numTextView;
     private EditText nameTextView;
     private EditText teamTextView;
-
+    private EditText urlTextView;
     Button button;
 
     @Override
@@ -25,6 +25,7 @@ public class InputActivity extends AppCompatActivity {
         numTextView = (EditText) findViewById(R.id.editTextNum);
         nameTextView = (EditText) findViewById(R.id.editTextName);
         teamTextView = (EditText) findViewById(R.id.editTextTeam);
+        urlTextView = (EditText) findViewById(R.id.editTextURL);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,12 +33,14 @@ public class InputActivity extends AppCompatActivity {
                 String num = numTextView.getText().toString();
                 String name = nameTextView.getText().toString();
                 String team = teamTextView.getText().toString();
+                String url = urlTextView.getText().toString();
 
                 SaveSharedPreference.setUser(
                         InputActivity.this,
                         numTextView.getText().toString(),
                         teamTextView.getText().toString(),
-                        nameTextView.getText().toString()
+                        nameTextView.getText().toString(),
+                        urlTextView.getText().toString()
                 );
 
 
@@ -46,6 +49,7 @@ public class InputActivity extends AppCompatActivity {
                     intent.putExtra("num", num);
                     intent.putExtra("team", team);
                     intent.putExtra("name", name);
+                    intent.putExtra("url", url);
 
                     startActivity(intent);
                     Toast.makeText(InputActivity.this, "정보가 저장되었습니다.", Toast.LENGTH_LONG).show();

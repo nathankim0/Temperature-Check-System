@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
     private String NUMBER = "";
     private String TEAM = "";
     private String NAME = "";
+    private String URL = "http://192.168.35.239:3000";
 
     private String today = "";
 
     private String sendingString = "";
-    private String TEMP = "";
-    String url = "http://192.168.35.239:3000";
+    private Double TEMP = 36.5;
 
     Button btn;
 
@@ -52,39 +55,40 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         numTextView = findViewById(R.id.textview_num);
-        teamTextView = findViewById(R.id.textview_team);
         nameTextView = findViewById(R.id.textview_name);
+        teamTextView = findViewById(R.id.textview_team);
         dateTextView = findViewById(R.id.textview_date);
-        tempTextView = findViewById(R.id.editTextTemp);
+
+        tempTextView=findViewById(R.id.editTextTemp);
+
         btn = findViewById(R.id.button);
 
         Intent loginIntent = getIntent();
         NUMBER = loginIntent.getStringExtra("num");
         TEAM = loginIntent.getStringExtra("team");
         NAME = loginIntent.getStringExtra("name");
+        URL = loginIntent.getStringExtra("url");
 
-        Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat weekdayFormat = new SimpleDateFormat("YYYY_MM_dd_HH:mm", Locale.getDefault());
-        today = weekdayFormat.format(currentTime);
-
-        numTextView.setText(NUMBER);
-        teamTextView.setText(TEAM);
-        nameTextView.setText(NAME);
-        dateTextView.setText(today);
-
-        sendingString = today + "/" + "일산교회/" + NUMBER + "/" + TEAM + "/" + NAME + "/";
+        setText_();
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TEMP = tempTextView.getText().toString();
-                if (TEMP.equals("")) {
+                sendingString = today + "/" + "일산교회/" + NUMBER + "/" + TEAM + "/" + NAME + "/";
+                String tempString=tempTextView.getText().toString();
+                if(tempString.equals("")) {
                     Toast.makeText(MainActivity.this, "온도를 입력해주세요.", Toast.LENGTH_SHORT).show();
-                } else {
-                    sendingString += TEMP + "\r\n";
-                    request();
-                    sendingString = today + "/" + "일산교회/" + NUMBER + "/" + TEAM + "/" + NAME + "/";
-                    tempTextView.setText("");
+                }
+                else {
+                    TEMP = Double.parseDouble(tempString);
+                    if (TEMP < 35 || TEMP > 39) {
+                        Toast.makeText(MainActivity.this, "온도를 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        sendingString += TEMP + "\r\n";
+                        request();
+                        sendingString = today + "/" + "일산교회/" + NUMBER + "/" + TEAM + "/" + NAME + "/";
+                        tempTextView.setText("");
+                    }
                 }
             }
         });
@@ -99,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             String jsonString = testjson.toString();
 
             final RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-            final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, testjson,
+            final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, testjson,
 
                     new Response.Listener<JSONObject>() {
                         @Override
@@ -124,7 +128,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     error.printStackTrace();
-                    //Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "옵션 - Setting - URL 확인해주세요", Toast.LENGTH_SHORT).show();
                 }
             }
             );
@@ -133,5 +138,55 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    void setText_() {
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat weekdayFormat = new SimpleDateFormat("YYYY_MM_dd_HH:mm", Locale.getDefault());
+        today = weekdayFormat.format(currentTime);
+
+        numTextView.setText(NUMBER);
+        teamTextView.setText(TEAM);
+        nameTextView.setText(NAME);
+
+        dateTextView.setText(today);
+    }
+
+    @Override
+    protected void onResume() {
+        NUMBER = SaveSharedPreference.getUserNum(this);
+        TEAM = SaveSharedPreference.getUserTeam(this);
+        NAME = SaveSharedPreference.getUserName(this);
+        URL = SaveSharedPreference.getUrl(this);
+
+        setText_();
+
+        super.onResume();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu1:
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+                break;
+                /*
+            case R.id.menu2:
+                break;
+            case R.id.menu3:
+                break;
+                */
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

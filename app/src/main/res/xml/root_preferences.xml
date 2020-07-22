@@ -1,12 +1,22 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory app:title="@string/messages_header">
-
+    <PreferenceCategory app:title="개인정보">
         <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
+            android:key="usernum"
+            android:title="전화번호"
+            app:useSimpleSummaryProvider="true"
+            android:dialogTitle="dialog"/>
+        <EditTextPreference
+            android:key="userteam"
+            android:title="부서"
+            app:useSimpleSummaryProvider="true"
+            android:dialogTitle="dialog"/>
+        <EditTextPreference
+            app:key="username"
+            app:title="이름"
             app:useSimpleSummaryProvider="true" />
-
+<!--
         <ListPreference
             app:defaultValue="reply"
             app:entries="@array/reply_entries"
@@ -14,9 +24,20 @@
             app:key="reply"
             app:title="@string/reply_title"
             app:useSimpleSummaryProvider="true" />
+-->
+
 
     </PreferenceCategory>
+    <PreferenceCategory app:title="URL">
 
+        <EditTextPreference
+            android:key="url"
+            android:title="URL"
+            app:useSimpleSummaryProvider="true"
+            android:dialogTitle="dialog"/>
+
+    </PreferenceCategory>
+<!--
     <PreferenceCategory app:title="@string/sync_header">
 
         <SwitchPreferenceCompat
@@ -31,5 +52,5 @@
             app:title="@string/attachment_title" />
 
     </PreferenceCategory>
-
+-->
 </PreferenceScreen>
